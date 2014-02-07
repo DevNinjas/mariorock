@@ -191,7 +191,7 @@ var Ice = Class.create(Sprite, {
         var ySpeed, game;
 
         game = Game.instance;
-        ySpeed = 300;
+        ySpeed = 600;
 
         this.y += ySpeed * evt.elapsed * 0.001;
         this.rotation += this.rotationSpeed * evt.elapsed * 0.001;
@@ -229,8 +229,6 @@ var SceneGameOver = Class.create(Scene, {
         this.addChild(scoreLabel);
 
         this.addEventListener(Event.TOUCH_START, this.touchToRestart);
-
-
     },
 
     touchToRestart: function(evt) {
