@@ -1,12 +1,12 @@
 // Start enchant.js
 enchant();
- 
+
 window.onload = function() {
     // Starting point
     var game = new Game(320, 440);
     game.preload('res/cenario.png',
                  'res/personagem.png',
-                 'res/Ice.png',
+                 'res/rock.png',
                  'res/Hit.mp3',
                  'res/bgm.mp3');
     game.fps = 30;
@@ -17,34 +17,34 @@ window.onload = function() {
         game.pushScene(scene);
     }
     window.scrollTo(0,0);
-    game.start();   
+    game.start();
 };
 
 /**
- * SceneGame  
+ * SceneGame
  */
 var SceneGame = Class.create(Scene, {
     /**
-     * The main gameplay scene.     
+     * The main gameplay scene.
      */
     initialize: function() {
         var game, label, bg, penguin, iceGroup;
- 
+
         // Call superclass constructor
         Scene.apply(this);
- 
+
         // Access to the game singleton instance
         game = Game.instance;
- 
+
         label = new Label('Pontos<br>0');
         label.x = 9;
-        label.y = 32;        
+        label.y = 32;
         label.color = 'white';
         label.font = '16px strong';
         label.textAlign = 'center';
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         this.scoreLabel = label;
- 
+
         bg = new Sprite(320,440);
         bg.image = game.assets['res/cenario.png'];
 
@@ -55,7 +55,7 @@ var SceneGame = Class.create(Scene, {
 
         iceGroup = new Group();
         this.iceGroup = iceGroup;
- 
+
         this.addChild(bg);
         this.addChild(iceGroup);
         this.addChild(penguin);
@@ -70,7 +70,7 @@ var SceneGame = Class.create(Scene, {
         this.score = 0;
 
         this.bgm = game.assets['res/bgm.mp3']; // Add this line
- 
+
         // Start BGM
         this.bgm.play();
     },
@@ -106,13 +106,13 @@ var SceneGame = Class.create(Scene, {
         for (var i = this.iceGroup.childNodes.length - 1; i >= 0; i--) {
             var ice;
             ice = this.iceGroup.childNodes[i];
-            if(ice.intersect(this.penguin)){  
+            if(ice.intersect(this.penguin)){
                 var game;
                 game = Game.instance;
-                game.assets['res/Hit.mp3'].play();                    
+                game.assets['res/Hit.mp3'].play();
                 this.iceGroup.removeChild(ice);
                 this.bgm.stop();
-                game.replaceScene(new SceneGameOver(this.score));        
+                game.replaceScene(new SceneGameOver(this.score));
                 break;
             }
         }
@@ -134,18 +134,18 @@ var SceneGame = Class.create(Scene, {
  */
  var Penguin = Class.create(Sprite, {
     /**
-     * The player character.     
+     * The player character.
      */
     initialize: function() {
         // Call superclass constructor
         Sprite.apply(this,[30, 43]);
-        this.image = Game.instance.assets['res/personagem.png'];        
+        this.image = Game.instance.assets['res/personagem.png'];
         this.animationDuration = 0;
         this.addEventListener(Event.ENTER_FRAME, this.updateAnimation);
     },
 
-    updateAnimation: function (evt) {        
-        this.animationDuration += evt.elapsed * 0.001;       
+    updateAnimation: function (evt) {
+        this.animationDuration += evt.elapsed * 0.001;
         if(this.animationDuration >= 0.25)
         {
             this.frame = (this.frame + 1) % 2;
@@ -153,7 +153,7 @@ var SceneGame = Class.create(Scene, {
         }
     },
 
-    switchToLaneNumber: function(lane){     
+    switchToLaneNumber: function(lane){
         var targetX = 160 - this.width/2 + (lane-1)*90;
         this.x = targetX;
     }
@@ -168,8 +168,8 @@ var Ice = Class.create(Sprite, {
      */
     initialize: function(lane) {
         // Call superclass constructor
-        Sprite.apply(this,[48, 49]);
-        this.image  = Game.instance.assets['res/Ice.png'];      
+        Sprite.apply(this,[36, 48]);
+        this.image  = Game.instance.assets['res/rock.png'];
         this.rotationSpeed = 0;
         this.setLane(lane);
         this.addEventListener(Event.ENTER_FRAME, this.update);
@@ -177,33 +177,33 @@ var Ice = Class.create(Sprite, {
 
     setLane: function(lane) {
         var game, distance;
-        game = Game.instance;        
+        game = Game.instance;
         distance = 90;
-     
+
         this.rotationSpeed = Math.random() * 100 - 50;
-     
+
         this.x = game.width/2 - this.width/2 + (lane - 1) * distance;
-        this.y = -this.height;    
-        this.rotation = Math.floor( Math.random() * 360 );    
+        this.y = -this.height;
+        this.rotation = Math.floor( Math.random() * 360 );
     },
 
-    update: function(evt) { 
+    update: function(evt) {
         var ySpeed, game;
-     
+
         game = Game.instance;
         ySpeed = 300;
-     
+
         this.y += ySpeed * evt.elapsed * 0.001;
-        this.rotation += this.rotationSpeed * evt.elapsed * 0.001;           
+        this.rotation += this.rotationSpeed * evt.elapsed * 0.001;
         if(this.y > game.height)
         {
-            this.parentNode.removeChild(this);          
+            this.parentNode.removeChild(this);
         }
     }
 });
 
 /**
- * SceneGameOver  
+ * SceneGameOver
  */
 var SceneGameOver = Class.create(Scene, {
     initialize: function(score) {
@@ -220,7 +220,7 @@ var SceneGameOver = Class.create(Scene, {
 
         scoreLabel = new Label('SCORE<br>' + score);
         scoreLabel.x = 9;
-        scoreLabel.y = 32;        
+        scoreLabel.y = 32;
         scoreLabel.color = 'white';
         scoreLabel.font = '16px strong';
         scoreLabel.textAlign = 'center';
