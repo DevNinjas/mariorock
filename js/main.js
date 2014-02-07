@@ -125,7 +125,7 @@ var SceneGame = Class.create(Scene, {
 
     setScore: function (value) {
         this.score = value;
-        this.scoreLabel.text = 'SCORE<br>' + this.score;
+        this.scoreLabel.text = 'Pontos<br>' + this.score;
     }
 });
 
@@ -218,7 +218,7 @@ var SceneGameOver = Class.create(Scene, {
         gameOverLabel.font = '32px strong';
         gameOverLabel.textAlign = 'center';
 
-        scoreLabel = new Label('SCORE<br>' + score);
+        scoreLabel = new Label('Pontos<br>' + score);
         scoreLabel.x = 9;
         scoreLabel.y = 32;        
         scoreLabel.color = 'white';
