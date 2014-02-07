@@ -160,7 +160,7 @@ var SceneGame = Class.create(Scene, {
 });
 
  /**
- * Ice Cube
+ * Rock Cube
  */
 var Ice = Class.create(Sprite, {
     /**
