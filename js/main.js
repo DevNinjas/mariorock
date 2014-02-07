@@ -50,7 +50,7 @@ var SceneGame = Class.create(Scene, {
 
         penguin = new Penguin();
         penguin.x = game.width/2 - penguin.width/2;
-        penguin.y = 280;
+        penguin.y = 360;
         this.penguin = penguin;
 
         iceGroup = new Group();
