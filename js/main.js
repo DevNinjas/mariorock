@@ -10,7 +10,7 @@ window.onload = function() {
                  'res/Hit.mp3',
                  'res/bgm.mp3');
     game.fps = 30;
-    game.scale = 1;
+    game.scale = 2.0;
     game.onload = function() {
         // Once Game finish loading
         var scene = new SceneGame();
@@ -125,7 +125,7 @@ var SceneGame = Class.create(Scene, {
 
     setScore: function (value) {
         this.score = value;
-        this.scoreLabel.text = 'SCORE<br>' + this.score;
+        this.scoreLabel.text = 'Pontos<br>' + this.score;
     }
 });
 
@@ -209,16 +209,16 @@ var SceneGameOver = Class.create(Scene, {
     initialize: function(score) {
         var gameOverLabel, scoreLabel;
         Scene.apply(this);
-        this.backgroundColor = 'black';
+        this.backgroundColor = 'lightblue';
 
-        gameOverLabel = new Label("GAME OVER<br>Tap to Restart");
+        gameOverLabel = new Label("GAME OVER<br>Restart");
         gameOverLabel.x = 8;
         gameOverLabel.y = 128;
         gameOverLabel.color = 'white';
         gameOverLabel.font = '32px strong';
         gameOverLabel.textAlign = 'center';
 
-        scoreLabel = new Label('SCORE<br>' + score);
+        scoreLabel = new Label('Pontos<br>' + score);
         scoreLabel.x = 9;
         scoreLabel.y = 32;
         scoreLabel.color = 'white';
